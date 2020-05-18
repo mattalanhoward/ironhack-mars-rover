@@ -76,6 +76,7 @@ const rover = {
   
   const command = (commands) => {
     for (i = 0; i < commands.length; i++) {
+      if ((rover.x < 10 && rover.x > -10) && (rover.y < 10 && rover.y > -10)){
       switch (commands[i]) {
         case "f":
           moveForward(rover);
@@ -87,12 +88,28 @@ const rover = {
           turnRight(rover);
           break;
       }
+    } else {
+      console.log("The rover has run to the edge of the grid and has turned around.")
+      turnLeft(rover);
+      turnLeft(rover);
+      switch (commands[i]) {
+        case "f":
+          moveForward(rover);
+          break;
+        case "l":
+          turnLeft(rover);
+          break;
+        case "r":
+          turnRight(rover);
+          break;
+      }
+    }
       rover.travelLog.push([rover.x, rover.y]);
       console.log(rover.x, rover.y);
     }
   };
   
-  command("rffrfflfrff");
+  command("ffffffffffffffffffffffffffffffffffffffffffffffff");
   // console.log(rover.x, rover.y);
   console.log(rover.travelLog);
   
