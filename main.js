@@ -74,6 +74,25 @@ const rover = {
   };
   // moveForward(rover);
   
+  const moveBackward = (rover) => {
+    console.log("moveBackward was called");
+    switch (rover.currentDirection) {
+      case "N":
+        rover.y--;
+        break;
+      case "S":
+        rover.y++;
+        break;
+      case "E":
+        rover.x--;
+        break;
+      case "W":
+        rover.x++;
+        break;
+    }
+  };
+  // moveBackward(rover);
+
   const command = (commands) => {
     for (i = 0; i < commands.length; i++) {
       if ((rover.x < 10 && rover.x > -10) && (rover.y < 10 && rover.y > -10)){
@@ -81,6 +100,9 @@ const rover = {
         case "f":
           moveForward(rover);
           break;
+        case "b":
+          moveBackward(rover);
+          break;  
         case "l":
           turnLeft(rover);
           break;
@@ -96,6 +118,9 @@ const rover = {
         case "f":
           moveForward(rover);
           break;
+        case "b":
+          moveBackward(rover);
+          break;  
         case "l":
           turnLeft(rover);
           break;
@@ -104,12 +129,13 @@ const rover = {
           break;
       }
     }
-      rover.travelLog.push([rover.x, rover.y]);
+      rover.travelLog.push([rover.x, rover.y, rover.currentDirection]);
       console.log(rover.x, rover.y);
     }
   };
   
-  command("ffffffffffffffffffffffffffffffffffffffffffffffff");
+  command("bbbllffff");
   // console.log(rover.x, rover.y);
   console.log(rover.travelLog);
+  
   
