@@ -133,7 +133,7 @@ const rover = {
       rover.travelLog.push([rover.x, rover.y, rover.currentDirection]);
       console.log(rover.x, rover.y);
     } else {
-    console.log("invalid input!")
+    console.log("invalid input!  Captain, You must check the commands.")
     break;
   }
   }
