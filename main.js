@@ -95,6 +95,7 @@ const rover = {
 
   const command = (commands) => {
     for (i = 0; i < commands.length; i++) {
+      if (commands[i] === "f" ||commands[i] === "b" ||commands[i] === "l" ||commands[i] === "r"){
       if ((rover.x < 10 && rover.x > -10) && (rover.y < 10 && rover.y > -10)){
       switch (commands[i]) {
         case "f":
@@ -131,10 +132,14 @@ const rover = {
     }
       rover.travelLog.push([rover.x, rover.y, rover.currentDirection]);
       console.log(rover.x, rover.y);
-    }
-  };
+    } else {
+    console.log("invalid input!")
+    break;
+  }
+  }
+};
   
-  command("bbbllffff");
+  command("bbbllfasdfadsffff");
   // console.log(rover.x, rover.y);
   console.log(rover.travelLog);
   
