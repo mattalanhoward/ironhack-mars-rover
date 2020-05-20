@@ -13,8 +13,6 @@ let map = [];
 
 createMap();
 
-console.log(map);
-
 function createMap() {
   for (let x = 0; x < 10; x++) {
     map[x] = [];
@@ -25,16 +23,17 @@ function createMap() {
 }
 
 function addCell(x, y) {
-  map[x][y] = cell(x, y); // create a new object on x and y
+  map[x][y] = (0, 0); // create a new object on x and y
 }
 
-function cell(x, y) {
-  return x + 1, y + 1;
+const addCrater = (x,y) => {
+  map[x][y] = 1;
 }
 
-console.log(map[1][1]);
+addCrater(2,1)
+addCrater(0,5)
+console.log(map);
 
-console.log(typeof map[1][1]);
 
 //create turn left function
 const turnLeft = (rover) => {
@@ -179,6 +178,6 @@ const command = (commands) => {
   }
 };
 
-command("bbbllfasdfadsffff");
+command("bbblffffff");
 // console.log(rover.x, rover.y);
 console.log(rover.travelLog);
