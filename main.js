@@ -1,5 +1,13 @@
 // Rover object goes here:
-const rover = {
+const rover1 = {
+  direction: ["N", "S", "E", "W"],
+  currentDirection: "N",
+  x: 0,
+  y: 0,
+  travelLog: []
+};
+
+const rover2 = {
   direction: ["N", "S", "E", "W"],
   currentDirection: "N",
   x: 0,
@@ -125,7 +133,7 @@ const moveBackward = (rover) => {
 // moveBackward(rover);
 
 // create command
-const command = (commands) => {
+const command = (rover, commands) => {
   for (i = 0; i < commands.length; i++) {
     if (
       commands[i] === "f" ||
@@ -169,7 +177,7 @@ const command = (commands) => {
             break;
         }
       }
-      rover.travelLog.push([rover.x, rover.y, rover.currentDirection]);
+      rover.travelLog.push([rover.x, rover.y]);  //, rover.currentDirection
       console.log(rover.x, rover.y);
     } else {
       console.log("invalid input!  Captain, You must check the commands.");
@@ -178,6 +186,23 @@ const command = (commands) => {
   }
 };
 
-command("bbblffffff");
+// if (rover1.travelLog === rover2.travelLog) {
+//   console.log("The rovers ran into each other and blew up!  Mission Failed")
+// };
+
+command(rover1, "bbbfffff");
+command(rover2, 'fffbbbbb')
+
+
+
+
+
+
+
+
+
+
 // console.log(rover.x, rover.y);
-console.log(rover.travelLog);
+console.log(`Rover 1 ${rover1.travelLog}`);
+console.log(`Rover 2 ${rover2.travelLog}`);
+
