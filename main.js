@@ -34,13 +34,17 @@ function addCell(x, y) {
   map[x][y] = (0, 0); // create a new object on x and y
 }
 
-const addCrater = (x,y) => {
-  map[x][y] = 1;
+// add number of craters
+const addCrater = (numCraters) => {
+  for(i=0;i < numCraters;i++) {
+  map[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 10)] = 1;
+}
 }
 
-addCrater(2,1)
-addCrater(0,5)
-console.log(map);
+addCrater(10)
+
+
+
 
 
 //create turn left function
@@ -108,7 +112,7 @@ const moveForward = (rover) => {
     case "W":
       rover.x--;
       break;
-  }
+  } 
 };
 // moveForward(rover);
 
@@ -135,13 +139,21 @@ const moveBackward = (rover) => {
 // create command
 const command = (rover, commands) => {
   for (i = 0; i < commands.length; i++) {
+    console.log(map[rover.x][rover.y])
+    //check correct inputs
     if (
       commands[i] === "f" ||
       commands[i] === "b" ||
       commands[i] === "l" ||
       commands[i] === "r"
     ) {
-      if (rover.x < 10 && rover.x > -10 && rover.y < 10 && rover.y > -10) {
+      //check that rover is on the map
+      if(map[rover.x][rover.y] === undefined) {
+        console.log('The rover has run off of the map')
+        break;
+      } 
+      //check that there are no craters
+      if (map[rover.x][rover.y] === 0) {
         switch (commands[i]) {
           case "f":
             moveForward(rover);
@@ -158,10 +170,10 @@ const command = (rover, commands) => {
         }
       } else {
         console.log(
-          "The rover has run to the edge of the grid and has turned around."
+          "The rover has run into a crater and has backed up and turned right."
         );
-        turnLeft(rover);
-        turnLeft(rover);
+        moveBackward(rover)
+        turnRight(rover);
         switch (commands[i]) {
           case "f":
             moveForward(rover);
@@ -186,20 +198,13 @@ const command = (rover, commands) => {
   }
 };
 
-// if (rover1.travelLog === rover2.travelLog) {
-//   console.log("The rovers ran into each other and blew up!  Mission Failed")
-// };
-
-command(rover1, "bbbfffff");
-command(rover2, 'fffbbbbb')
+console.log('rover1')
+command(rover1, "bbbbf");
+console.log('rover2')
+command(rover2, 'ffff');
 
 
-
-
-
-
-
-
+console.log(map);
 
 
 // console.log(rover.x, rover.y);
