@@ -41,10 +41,8 @@ const addCrater = (numCraters) => {
 }
 }
 
+//enter number of craters
 addCrater(10)
-
-
-
 
 
 //create turn left function
@@ -199,7 +197,7 @@ const command = (rover, commands) => {
 };
 
 console.log('rover1')
-command(rover1, "bbbbf");
+command(rover1, "fffffybbf");
 console.log('rover2')
 command(rover2, 'ffff');
 
