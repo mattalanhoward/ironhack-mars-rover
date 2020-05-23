@@ -36,14 +36,13 @@ function addCell(x, y) {
 
 // add number of craters
 const addCrater = (numCraters) => {
-  for(i=0;i < numCraters;i++) {
-  map[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 10)] = 1;
-}
-}
+  for (i = 0; i < numCraters; i++) {
+    map[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 10)] = 1;
+  }
+};
 
 //enter number of craters
-addCrater(10)
-
+addCrater(10);
 
 //create turn left function
 const turnLeft = (rover) => {
@@ -110,7 +109,7 @@ const moveForward = (rover) => {
     case "W":
       rover.x--;
       break;
-  } 
+  }
 };
 // moveForward(rover);
 
@@ -137,20 +136,15 @@ const moveBackward = (rover) => {
 // create command
 const command = (rover, commands) => {
   for (i = 0; i < commands.length; i++) {
-    console.log(map[rover.x][rover.y])
+    console.log(map[rover.x][rover.y]);
     //check correct inputs
     if (
       commands[i] === "f" ||
       commands[i] === "b" ||
       commands[i] === "l" ||
       commands[i] === "r"
-    ) {
-      //check that rover is on the map
-      if(map[rover.x][rover.y] === undefined) {
-        console.log('The rover has run off of the map')
-        break;
-      } 
-      //check that there are no craters
+    ) {     
+      //check craters and move rover
       if (map[rover.x][rover.y] === 0) {
         switch (commands[i]) {
           case "f":
@@ -166,46 +160,33 @@ const command = (rover, commands) => {
             turnRight(rover);
             break;
         }
-      } else {
+      } else if (map[rover.x][rover.y] === 1){
         console.log(
-          "The rover has run into a crater and has backed up and turned right."
+          "The rover has found a crater, has backed up and will turn right."
         );
-        moveBackward(rover)
+        moveBackward(rover);
         turnRight(rover);
-        switch (commands[i]) {
-          case "f":
-            moveForward(rover);
-            break;
-          case "b":
-            moveBackward(rover);
-            break;
-          case "l":
-            turnLeft(rover);
-            break;
-          case "r":
-            turnRight(rover);
-            break;
-        }
-      }
-      rover.travelLog.push([rover.x, rover.y]);  //, rover.currentDirection
+      } else {
+      //check that rover is on the map
+      console.log("The rover has reached the edge of the map.");
+      turnRight(rover)
+      turnRight(rover)
+    }
+      rover.travelLog.push([rover.x, rover.y, rover.currentDirection]);
       console.log(rover.x, rover.y);
     } else {
       console.log("invalid input!  Captain, You must check the commands.");
       break;
     }
   }
-};
-
-console.log('rover1')
-command(rover1, "fffffybbf");
-console.log('rover2')
-command(rover2, 'ffff');
-
+  };
 
 console.log(map);
-
+console.log("rover1");
+command(rover1, "fffffffffff");
+console.log("rover2");
+command(rover2, "fffrfflffrffflfffrfffff");
 
 // console.log(rover.x, rover.y);
-console.log(`Rover 1 ${rover1.travelLog}`);
-console.log(`Rover 2 ${rover2.travelLog}`);
-
+// console.log(`Rover 1 ${rover1.travelLog}`);
+// console.log(`Rover 2 ${rover2.travelLog}`);
