@@ -19,11 +19,11 @@ const rover2 = {
 // ======================
 //create map with 2d arrays
 let map = [];
-createMap();
-function createMap() {
-  for (let x = 0; x < 10; x++) {
+
+function createMap(grid) {
+  for (let x = 0; x < grid; x++) {
     map[x] = [];
-    for (let y = 0; y < 10; y++) {
+    for (let y = 0; y < grid; y++) {
       addCell(x, y);
     }
   }
@@ -36,11 +36,14 @@ function addCell(x, y) {
 // add number of craters
 const addCrater = (numCraters) => {
   for (i = 0; i < numCraters; i++) {
-    map[Math.floor(Math.random() * 10)][Math.floor(Math.random() * 10)] = 1;
+    map[Math.floor(Math.random() * map.length)][Math.floor(Math.random() * map.length)] = 1;
   }
 };
 
-//enter number of craters
+//ENTER GRID SIZE.  This will be a square.
+createMap(10);
+
+//ENTER NUMBER OF CRATERS
 addCrater(10);
 
 
@@ -136,15 +139,16 @@ const command = (rover, commands) => {
   for (i = 0; i < commands.length; i++) {
     //make sure rover does not leave map
     if (rover.x >= 0 &&
-      rover.x < 10 &&
+      rover.x < map.length &&
       rover.y >= 0 &&
-      rover.y < 10) {
+      rover.y < map.length) {
 
     //check craters and move rover
     if (map[rover.x][rover.y] === 1) {
       console.log(
         "The rover has found a crater, has backed up and is turning right."
       );
+      // break; // uncomment to stop rover when obstacle is found. 
       moveBackward(rover)
       turnRight(rover);
       } else if (map[rover.x][rover.y] === 0) {
@@ -188,3 +192,6 @@ command(rover1, "ffffffffffffffffffffff");
 
 console.log("rover2");
 command(rover2, "fffrfflffrffflfffrfffff");
+
+
+
