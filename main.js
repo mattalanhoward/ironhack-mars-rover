@@ -1,9 +1,8 @@
 //notes
-// Rover changes direction and continues orders after reaching edge of map or finding crater.
+// Rover changes direction and continues orders after reaching edge of map or finding crater(this can be changed by uncommenting the break statement).
 // map is generated with function.
 // map size can be input with createMap(NUM OF ROWS/COLUMNS) function.
-// number of craters is input my user and are randomly placed. 
-
+// number of craters is input my user and are randomly placed.
 
 // Rover object goes here:
 const rover1 = {
@@ -22,7 +21,6 @@ const rover2 = {
   travelLog: []
 };
 
-
 // ======================
 //create map with 2d arrays
 let map = [];
@@ -39,11 +37,12 @@ function addCell(x, y) {
   map[x][y] = (0, 0); // create a new object on x and y
 }
 
-
 // add number of craters
 const addCrater = (numCraters) => {
   for (i = 0; i < numCraters; i++) {
-    map[Math.floor(Math.random() * map.length)][Math.floor(Math.random() * map.length)] = 1;
+    map[Math.floor(Math.random() * map.length)][
+      Math.floor(Math.random() * map.length)
+    ] = 1;
   }
 };
 
@@ -52,7 +51,6 @@ createMap(10);
 
 //ENTER NUMBER OF CRATERS
 addCrater(10);
-
 
 //create turn left function
 const turnLeft = (rover) => {
@@ -77,7 +75,6 @@ const turnLeft = (rover) => {
   }
 };
 
-
 //create turn right function
 const turnRight = (rover) => {
   console.log("turnRight was called!");
@@ -100,7 +97,6 @@ const turnRight = (rover) => {
   }
 };
 
-
 // create move forward function
 const moveForward = (rover) => {
   console.log("moveForward was called");
@@ -119,7 +115,6 @@ const moveForward = (rover) => {
       break;
   }
 };
-
 
 //create move backward function
 const moveBackward = (rover) => {
@@ -140,56 +135,54 @@ const moveBackward = (rover) => {
   }
 };
 
-
 // create command
 const command = (rover, commands) => {
   for (i = 0; i < commands.length; i++) {
     //make sure rover does not leave map
-    if (rover.x >= 0 &&
+    if (
+      rover.x >= 0 &&
       rover.x < map.length &&
       rover.y >= 0 &&
-      rover.y < map.length) {
-
-    //check craters and move rover
-    if (map[rover.x][rover.y] === 1) {
-      console.log(
-        `The rover has found a crater at ${rover.x},${rover.y}`
-      );
-      // break; // uncomment to stop rover when obstacle is found. 
-      moveForward(rover)
+      rover.y < map.length
+    ) {
+      //check craters and move rover
+      if (map[rover.x][rover.y] === 1) {
+        console.log(`The rover has found a crater at ${rover.x},${rover.y}`);
+        //break; // uncomment to stop rover when obstacle is found.
+        turnRight(rover);
       } else if (map[rover.x][rover.y] === 0) {
-      switch (commands[i]) {
-        case "f":
-          moveForward(rover);
-          break;
-        case "b":
-          moveBackward(rover);
-          break;
-        case "l":
-          turnLeft(rover);
-          break;
-        case "r":
-          turnRight(rover);
-          break;
-        default:
-          console.log("invalid input!  Captain, You must check the commands.");
+        switch (commands[i]) {
+          case "f":
+            moveForward(rover);
+            break;
+          case "b":
+            moveBackward(rover);
+            break;
+          case "l":
+            turnLeft(rover);
+            break;
+          case "r":
+            turnRight(rover);
+            break;
+          default:
+            console.log(
+              "invalid input!  Captain, You must check the commands."
+            );
+        }
       }
-    } 
-  } else {
-      console.log("The rover has reached the edge of the map and is turning around.");
-      moveBackward(rover)
+    } else {
+      console.log(
+        "The rover has reached the edge of the map and is turning around."
+      );
+      moveBackward(rover);
       turnRight(rover);
       turnRight(rover);
     }
 
     rover.travelLog.push([rover.x, rover.y, rover.currentDirection]);
     console.log(rover.x, rover.y, rover.currentDirection);
-  
   }
 };
-
-
-
 
 console.log(map);
 
@@ -198,6 +191,3 @@ command(rover1, "ffffffffffffffffffffff");
 
 console.log("rover2");
 command(rover2, "fffrfflffrffflfffrfffff");
-
-
-
