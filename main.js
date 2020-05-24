@@ -141,7 +141,13 @@ const command = (rover, commands) => {
       rover.y < 10) {
 
     //check craters and move rover
-    if (map[rover.x][rover.y] === 0) {
+    if (map[rover.x][rover.y] === 1) {
+      console.log(
+        "The rover has found a crater, has backed up and is turning right."
+      );
+      moveBackward(rover)
+      turnRight(rover);
+      } else if (map[rover.x][rover.y] === 0) {
       switch (commands[i]) {
         case "f":
           moveForward(rover);
@@ -158,14 +164,8 @@ const command = (rover, commands) => {
         default:
           console.log("invalid input!  Captain, You must check the commands.");
       }
-    } else if (map[rover.x][rover.y] === 1) {
-      console.log(
-        "The rover has found a crater and is turning right."
-      );
-      turnRight(rover);
-    }
-    } else {
-      //check that rover is on the map
+    } 
+  } else {
       console.log("The rover has reached the edge of the map and is turning around.");
       moveBackward(rover)
       turnRight(rover);
@@ -173,7 +173,8 @@ const command = (rover, commands) => {
     }
 
     rover.travelLog.push([rover.x, rover.y, rover.currentDirection]);
-    console.log(rover.x, rover.y);
+    console.log(rover.x, rover.y, rover.currentDirection);
+  
   }
 };
 
@@ -187,5 +188,3 @@ command(rover1, "ffffffffffffffffffffff");
 
 console.log("rover2");
 command(rover2, "fffrfflffrffflfffrfffff");
-
-console.log(map[rover1.x][rover1.y])
