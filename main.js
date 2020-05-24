@@ -15,12 +15,11 @@ const rover2 = {
   travelLog: []
 };
 
+
 // ======================
 //create map with 2d arrays
 let map = [];
-
 createMap();
-
 function createMap() {
   for (let x = 0; x < 10; x++) {
     map[x] = [];
@@ -29,10 +28,10 @@ function createMap() {
     }
   }
 }
-
 function addCell(x, y) {
   map[x][y] = (0, 0); // create a new object on x and y
 }
+
 
 // add number of craters
 const addCrater = (numCraters) => {
@@ -43,6 +42,7 @@ const addCrater = (numCraters) => {
 
 //enter number of craters
 addCrater(10);
+
 
 //create turn left function
 const turnLeft = (rover) => {
@@ -66,8 +66,7 @@ const turnLeft = (rover) => {
       console.log(`Invalid Direction.  We will head North`);
   }
 };
-// turnLeft(rover);
-// console.log(rover.currentDirection);
+
 
 //create turn right function
 const turnRight = (rover) => {
@@ -90,8 +89,7 @@ const turnRight = (rover) => {
       console.log(`Invalid Direction.  We will head North`);
   }
 };
-// turnRight(rover);
-// console.log(rover.currentDirection);
+
 
 // create move forward function
 const moveForward = (rover) => {
@@ -111,7 +109,7 @@ const moveForward = (rover) => {
       break;
   }
 };
-// moveForward(rover);
+
 
 //create move backward function
 const moveBackward = (rover) => {
@@ -131,62 +129,63 @@ const moveBackward = (rover) => {
       break;
   }
 };
-// moveBackward(rover);
+
 
 // create command
 const command = (rover, commands) => {
   for (i = 0; i < commands.length; i++) {
-    console.log(map[rover.x][rover.y]);
-    //check correct inputs
-    if (
-      commands[i] === "f" ||
-      commands[i] === "b" ||
-      commands[i] === "l" ||
-      commands[i] === "r"
-    ) {     
-      //check craters and move rover
-      if (map[rover.x][rover.y] === 0) {
-        switch (commands[i]) {
-          case "f":
-            moveForward(rover);
-            break;
-          case "b":
-            moveBackward(rover);
-            break;
-          case "l":
-            turnLeft(rover);
-            break;
-          case "r":
-            turnRight(rover);
-            break;
-        }
-      } else if (map[rover.x][rover.y] === 1){
-        console.log(
-          "The rover has found a crater, has backed up and will turn right."
-        );
-        moveBackward(rover);
-        turnRight(rover);
-      } else {
-      //check that rover is on the map
-      console.log("The rover has reached the edge of the map.");
-      turnRight(rover)
-      turnRight(rover)
+    //make sure rover does not leave map
+    if (rover.x >= 0 &&
+      rover.x < 10 &&
+      rover.y >= 0 &&
+      rover.y < 10) {
+
+    //check craters and move rover
+    if (map[rover.x][rover.y] === 0) {
+      switch (commands[i]) {
+        case "f":
+          moveForward(rover);
+          break;
+        case "b":
+          moveBackward(rover);
+          break;
+        case "l":
+          turnLeft(rover);
+          break;
+        case "r":
+          turnRight(rover);
+          break;
+        default:
+          console.log("invalid input!  Captain, You must check the commands.");
+      }
+    } else if (map[rover.x][rover.y] === 1) {
+      console.log(
+        "The rover has found a crater and is turning right."
+      );
+      turnRight(rover);
     }
-      rover.travelLog.push([rover.x, rover.y, rover.currentDirection]);
-      console.log(rover.x, rover.y);
     } else {
-      console.log("invalid input!  Captain, You must check the commands.");
-      break;
+      //check that rover is on the map
+      console.log("The rover has reached the edge of the map and is turning around.");
+      moveBackward(rover)
+      turnRight(rover);
+      turnRight(rover);
     }
+
+    rover.travelLog.push([rover.x, rover.y, rover.currentDirection]);
+    console.log(rover.x, rover.y);
   }
-  };
+};
+
+
+
 
 console.log(map);
+
 console.log("rover1");
-command(rover1, "fffffffffff");
+command(rover1, "ffffffffffffffffffffff");
+
 console.log("rover2");
 command(rover2, "fffrfflffrffflfffrfffff");
 
-// console.log(rover.x, rover.y);
-// console.log(`Rover 1 ${rover1.travelLog}`);
-// console.log(`Rover 2 ${rover2.travelLog}`);
+console.log(map[rover1.x][rover1.y])
