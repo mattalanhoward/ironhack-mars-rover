@@ -1,3 +1,10 @@
+//notes
+// Rover changes direction and continues orders after reaching edge of map or finding crater.
+// map is generated with function.
+// map size can be input with createMap(NUM OF ROWS/COLUMNS) function.
+// number of craters is input my user and are randomly placed. 
+
+
 // Rover object goes here:
 const rover1 = {
   direction: ["N", "S", "E", "W"],
@@ -146,11 +153,10 @@ const command = (rover, commands) => {
     //check craters and move rover
     if (map[rover.x][rover.y] === 1) {
       console.log(
-        "The rover has found a crater, has backed up and is turning right."
+        `The rover has found a crater at ${rover.x},${rover.y}`
       );
       // break; // uncomment to stop rover when obstacle is found. 
-      moveBackward(rover)
-      turnRight(rover);
+      moveForward(rover)
       } else if (map[rover.x][rover.y] === 0) {
       switch (commands[i]) {
         case "f":
