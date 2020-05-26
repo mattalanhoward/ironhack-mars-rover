@@ -147,8 +147,11 @@ const command = (rover, commands) => {
     ) {
       //check craters and move rover
       if (map[rover.x][rover.y] === 1) {
-        console.log(`The rover has found a crater at ${rover.x},${rover.y}`);
-        //break; // uncomment to stop rover when obstacle is found.
+        console.log(
+          `The rover has found a crater at ${rover.x},${rover.y} and is turning around.`
+        );
+        // break; // uncomment to stop rover when obstacle is found.
+        turnRight(rover);
         turnRight(rover);
       } else if (map[rover.x][rover.y] === 0) {
         switch (commands[i]) {
@@ -186,8 +189,8 @@ const command = (rover, commands) => {
 
 console.log(map);
 
-console.log("rover1");
 command(rover1, "ffffffffffffffffffffff");
+console.log(`Rover 1 Travel Log ${rover1.travelLog}`);
 
-console.log("rover2");
 command(rover2, "fffrfflffrffflfffrfffff");
+console.log(`Rover 2 Travel Log ${rover2.travelLog}`);
